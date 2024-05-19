@@ -1,0 +1,17 @@
+FROM node:20-alpine3.18
+
+ARG REST_API_ROOT_URL
+ARG REST_API_PORT_NO
+
+ENV REST_API_ROOT_URL=${REST_API_ROOT_URL}
+ENV REST_API_PORT_NO=${REST_API_PORT_NO}
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm install && npm run tsoa
+
+EXPOSE ${REST_API_PORT_NO}
+
+CMD ["npm", "run", "start_gui"]
